@@ -1,8 +1,10 @@
 <template>
   <section class="wrapper">
     <div class="flex align-items-center justify-content-between">
-      <h1>Products</h1>
-      total: {{ totalProducts }}
+      <h1 class="title">
+        <u>Store Products</u>
+      </h1>
+      total products: {{ totalProducts }}
     </div>
     <ul class="product-list">
         <Card :list="list" />  
@@ -23,12 +25,13 @@ const totalProducts: globalThis.ComputedRef<number> = computed(
 </script>
 
 <style lang="scss" scoped>
-.product-list {
-  padding: 0;
 
-  li {
-    margin-bottom: 2em;
-  }
+.title {
+  margin: 12px;
+  margin-top: 32px;
+}
+.product-list {
+  padding: 0.5;  
 }
 
 </style>

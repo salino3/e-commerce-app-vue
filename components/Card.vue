@@ -1,17 +1,17 @@
 <template>
-     <li v-for="item in list" :key="item.id">
+     <li v-for="item in props.list" :key="item.id">
         <NuxtLink :to="`/product/${item.id}`">
-       <article class="grid product-container card"
+       <article class="grid product-container card shadow-inset-center"
           :class="{
             'product-container--has-discount': item.discountPercentage > 15,
           }"
         >
           <div class="image">
-            <img :src="item?.images[0]" alt="product image" loading="lazy" />
+            <img class="img rotate" :src="item?.images[0]" alt="product image" loading="lazy" />
           </div>
           <div class="product-container__content">
             <h2>
-              {{ item?.title }}
+              {{ item?.title }} <span v-if="item.discountPercentage > 15">- {{ item.discountPercentage }}% discount!</span>
             </h2>
             <p>
               <span class="grey-text">Description: </span>
@@ -53,6 +53,11 @@ const props = defineProps<{
 
 <style lang="scss" scope>
  
+li {
+    margin-bottom: 2em;
+    margin: 18px;
+  }
+
 .product-container {
   align-items: flex-start;
   grid-template-columns: 210px 1fr 100px;
@@ -61,6 +66,33 @@ const props = defineProps<{
 .product-container__content {
   padding: 0 1em;
 }
+
+.shadow-inset-center:hover {
+	-webkit-animation: shadow-inset-center 0.2s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+	        animation: shadow-inset-center 0.2s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+@-webkit-keyframes shadow-inset-center {
+  0% {
+    -webkit-box-shadow: inset 0 0 0 0 rgba(0, 0, 0, 0);
+            box-shadow: inset 0 0 0 0 rgba(0, 0, 0, 0);
+  }
+  100% {
+    -webkit-box-shadow: inset 0 0 14px 0px rgba(0, 0, 0, 0.5);
+            box-shadow: inset 0 0 14px 0px rgba(0, 0, 0, 0.5);
+  }
+}
+@keyframes shadow-inset-center {
+  0% {
+    -webkit-box-shadow: inset 0 0 0 0 rgba(0, 0, 0, 0);
+            box-shadow: inset 0 0 0 0 rgba(0, 0, 0, 0);
+  }
+  100% {
+    -webkit-box-shadow: inset 0 0 14px 0px rgba(0, 0, 0, 0.5);
+            box-shadow: inset 0 0 14px 0px rgba(0, 0, 0, 0.5);
+  }
+}
+
 
 .product-container__aside {
   flex-direction: column;
@@ -74,10 +106,24 @@ const props = defineProps<{
   flex-direction: column;
   justify-content: center;
 
-  img {
+  .img {
     width: 100%;
-    aspect-ratio: 1/1;
+    max-width: 250px;
+    height: 100%;
+    max-height: 300px;
     object-fit: cover;
+
+  }
+             
+.rotate:hover {
+    animation-name: rotate;
+    animation-delay: 0.2s;
+    animation-duration: 1s;
+  }
+  
+  @keyframes rotate {
+    0% {transform: rotate(0deg);}
+    100% {transform: rotate(360deg);}
   }
 }
 

@@ -1,8 +1,12 @@
 
 <template>
     <nav class="nav">
-        <div>Logo</div>
-        <div>Cart</div>
+        <li>
+          <a href="#">element 1</a>
+        </li>
+        <li>
+          <a href="#">element 2</a>
+        </li>
     </nav>
 </template>
 

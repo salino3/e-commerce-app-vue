@@ -5,7 +5,7 @@
       total: {{ totalProducts }}
     </div>
     <ul class="product-list">
-        <Card  />  
+        <Card :list="list" />  
     </ul>
   </section>
 </template>

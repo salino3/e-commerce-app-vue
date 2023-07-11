@@ -38,10 +38,13 @@
 </template>
 
 <script setup lang="ts">
-import { productService } from "@/services/all-products";
 import { Product } from "../all-types/index";
 
-const list: Product[] = await productService.getAll();
+
+
+const props = defineProps<{
+    list: Product[]
+}>()
 
  const onAddItem = (product: Product) => {
    console.log('onAddItem', product)
